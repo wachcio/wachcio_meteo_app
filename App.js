@@ -17,26 +17,26 @@ import axios from 'axios';
 const SharedStorage = NativeModules.SharedStorage;
 
 function App() {
-  useEffect(() => {
-    setInterval(() => {
-      (async () => {
-        try {
-          const response = await axios.get(
-            'http://meteo.wachcio.pl/API/GetJSON.php?data=current&sensor=0',
-          );
-          console.log(response.data);
-          SharedStorage.set(
-            JSON.stringify({
-              text: `${response.data.sensorName} ${response.data.valueCurrent.value}${response.data.unit}`,
-            }),
-          );
-        } catch (error) {
-          console.error(error);
-        }
-      })();
-    }, 1000 * 60);
-    // console.log(SharedStorage);
-  });
+  // useEffect(() => {
+  setInterval(() => {
+    (async () => {
+      try {
+        const response = await axios.get(
+          'http://meteo.wachcio.pl/API/GetJSON.php?data=current&sensor=0',
+        );
+        console.log(response.data);
+        SharedStorage.set(
+          JSON.stringify({
+            text: `${response.data.sensorName}
+              ${response.data.valueCurrent.value}${response.data.unit}`,
+          }),
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, 1000 * 10);
+  // });
 
   return (
     <SafeAreaView>
