@@ -23,9 +23,9 @@ const App = () => {
           startInLoadingState={true}
           renderLoading={() => <Text>{'Loading...'}</Text>}
           renderError={() => <Text>{'Error!'}</Text>}
-          onMessage={msg => {
-            console.log('WEBVIEW msg = ', msg);
-          }}
+          // onMessage={msg => {
+          //   console.log('WEBVIEW msg = ', msg);
+          // }}
         />
       </Container>
     </SafeAreaView>
