@@ -6,32 +6,40 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {Component} from 'react';
 import {SafeAreaView, View, Text} from 'react-native';
 
 import styled from 'styled-components';
 import WebView from 'react-native-webview';
+import {NativeModules} from 'react-native';
+const SharedStorage = NativeModules.SharedStorage;
 
-const App = () => {
-  console.log('Start log');
+class App extends Component {
+  componentDidMount() {
+    SharedStorage.set(
+      JSON.stringify({text: 'This is data from the React Native app'}),
+    );
+  }
 
-  return (
-    <SafeAreaView>
-      <Container>
-        <DynamicWebView
-          source={{uri: 'http://meteo.wachcio.pl/'}}
-          startInLoadingState={true}
-          renderLoading={() => <Text>{'Loading...'}</Text>}
-          renderError={() => <Text>{'Error!'}</Text>}
+  render() {
+    return (
+      <SafeAreaView>
+        <Container>
+          <DynamicWebView
+            source={{uri: 'http://meteo.wachcio.pl/'}}
+            startInLoadingState={true}
+            renderLoading={() => <Text>{'Loading...'}</Text>}
+            renderError={() => <Text>{'Error!'}</Text>}
 
-          // onMessage={msg => {
-          //   console.log('WEBVIEW msg = ', msg);
-          // }}
-        />
-      </Container>
-    </SafeAreaView>
-  );
-};
+            // onMessage={msg => {
+            //   console.log('WEBVIEW msg = ', msg);
+            // }}
+          />
+        </Container>
+      </SafeAreaView>
+    );
+  }
+}
 
 const Container = styled(View)`
   width: 100%;
