@@ -3,5 +3,7 @@
 Build realese app
 
 cd android
+
 npm run android
+
 ./gradlew assembleRelease
