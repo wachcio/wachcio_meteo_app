@@ -23,18 +23,9 @@ const App = () => {
           startInLoadingState={true}
           renderLoading={() => <Text>{'Loading...'}</Text>}
           renderError={() => <Text>{'Error!'}</Text>}
-          onShouldStartLoadWithRequest={request => {
-            console.log('WEBVIEW request = ', request.mainDocumentURL);
-
-            if (request.mainDocumentURL.includes('wiadomosci')) {
-              return false;
-            }
-
-            return true;
-          }}
-          onMessage={msg => {
-            console.log('WEBVIEW msg = ', msg);
-          }}
+          // onMessage={msg => {
+          //   console.log('WEBVIEW msg = ', msg);
+          // }}
         />
       </Container>
     </SafeAreaView>
