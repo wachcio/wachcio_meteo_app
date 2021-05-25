@@ -25,6 +25,7 @@ function App() {
           'http://meteo.wachcio.pl/API/GetJSON.php?data=current&sensor=0',
         );
         console.log(response.data);
+        console.log(SharedStorage);
         SharedStorage.set(
           JSON.stringify({
             text: `${response.data.sensorName}
