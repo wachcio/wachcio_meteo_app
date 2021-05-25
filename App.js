@@ -12,20 +12,30 @@ import {SafeAreaView, View, Text} from 'react-native';
 import styled from 'styled-components';
 import WebView from 'react-native-webview';
 import {NativeModules} from 'react-native';
+import axios from 'axios';
 
 const SharedStorage = NativeModules.SharedStorage;
 
 function App() {
-  // componentDidMount() {
-  //   SharedStorage.set(
-  //     JSON.stringify({text: 'This is data from the React Native app'}),
-  //   );
-  //   console.log(SharedStorage);
-  // }
-
   useEffect(() => {
-    SharedStorage.set(JSON.stringify({text: '20°C'}));
-    console.log(SharedStorage);
+    setInterval(() => {
+      (async () => {
+        try {
+          const response = await axios.get(
+            'http://meteo.wachcio.pl/API/GetJSON.php?data=current&sensor=0',
+          );
+          console.log(response.data);
+          SharedStorage.set(
+            JSON.stringify({
+              text: `${response.data.sensorName} ${response.data.valueCurrent.value}${response.data.unit}`,
+            }),
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    }, 1000 * 60);
+    // console.log(SharedStorage);
   });
 
   return (
