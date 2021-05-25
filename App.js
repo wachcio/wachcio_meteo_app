@@ -12,6 +12,7 @@ import {SafeAreaView, View, Text} from 'react-native';
 import styled from 'styled-components';
 import WebView from 'react-native-webview';
 import {NativeModules} from 'react-native';
+
 const SharedStorage = NativeModules.SharedStorage;
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
     SharedStorage.set(
       JSON.stringify({text: 'This is data from the React Native app'}),
     );
+    console.log(SharedStorage);
   }
 
   render() {
@@ -30,10 +32,14 @@ class App extends Component {
             startInLoadingState={true}
             renderLoading={() => <Text>{'Loading...'}</Text>}
             renderError={() => <Text>{'Error!'}</Text>}
+            onShouldStartLoadWithRequest={request => {
+              console.log('WEBVIEW request = ', request);
 
-            // onMessage={msg => {
-            //   console.log('WEBVIEW msg = ', msg);
-            // }}
+              return true;
+            }}
+            onMessage={msg => {
+              console.log('WEBVIEW msg = ', msg);
+            }}
           />
         </Container>
       </SafeAreaView>
