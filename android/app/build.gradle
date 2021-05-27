@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.wachcio.meteo"
+        applicationId "com.meteoreactnative"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -28,9 +28,13 @@ function App() {
         console.log(SharedStorage);
         SharedStorage.set(
           JSON.stringify({
-            text: `${response.data.sensorName}
+            text: `Temperatura
               ${response.data.valueCurrent.value}${response.data.unit}`,
           }),
+          // JSON.stringify({
+          //   text: `${response.data.sensorName}
+          //     ${response.data.valueCurrent.value}${response.data.unit}`,
+          // }),
         );
       } catch (error) {
         console.error(error);
